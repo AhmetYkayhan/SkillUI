@@ -7,15 +7,16 @@ design rules; platform layers specialize them.
 
 ```
 skills/
-└── ui-design-core/      # platform-independent UI/UX decision rules
+├── ui-design-core/      # platform-independent UI/UX decision rules
+└── web-ui-design/       # browser specialization
 ```
 
-Planned layers:
+Layers:
 
 | Skill | Responsibility |
 |---|---|
 | `ui-design-core` | Universal UI/UX rules. Available now. |
-| `web-ui-design` | Web/browser specialization. |
+| `web-ui-design` | Web/browser specialization. Available now. |
 | `mobile-ui-design` | Native and cross-platform mobile specialization. |
 | `game-ui-design` | Game engine HUD and menu specialization. |
 | `ui-review` | Detailed UI audit and review pass. |
@@ -39,15 +40,17 @@ Project scope:
 
 ```bash
 mkdir -p .claude/skills
-cp -R skills/ui-design-core .claude/skills/
+cp -R skills/ui-design-core skills/web-ui-design .claude/skills/
 ```
 
 User scope, available in every project:
 
 ```bash
 mkdir -p ~/.claude/skills
-cp -R skills/ui-design-core ~/.claude/skills/
+cp -R skills/ui-design-core skills/web-ui-design ~/.claude/skills/
 ```
+
+Install `ui-design-core` alongside any platform layer; the platform layers assume it is present.
 
 ## Compatibility
 
