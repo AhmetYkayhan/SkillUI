@@ -10,7 +10,8 @@ skills/
 ├── ui-design-core/      # platform-independent UI/UX decision rules
 ├── web-ui-design/       # browser specialization
 ├── mobile-ui-design/    # mobile application specialization
-└── game-ui-design/      # game and HUD specialization
+├── game-ui-design/      # game and HUD specialization
+└── ui-review/           # audit pass over UI that already exists
 ```
 
 Layers:
@@ -21,7 +22,7 @@ Layers:
 | `web-ui-design` | Web/browser specialization. Available now. |
 | `mobile-ui-design` | Native and cross-platform mobile specialization. Available now. |
 | `game-ui-design` | Game engine HUD and menu specialization. Available now. |
-| `ui-review` | Detailed UI audit and review pass. |
+| `ui-review` | Detailed UI audit and review pass. Available now. |
 
 ## Design principles
 
@@ -42,14 +43,14 @@ Project scope:
 
 ```bash
 mkdir -p .claude/skills
-cp -R skills/ui-design-core skills/web-ui-design skills/mobile-ui-design skills/game-ui-design .claude/skills/
+cp -R skills/ui-design-core skills/web-ui-design skills/mobile-ui-design skills/game-ui-design skills/ui-review .claude/skills/
 ```
 
 User scope, available in every project:
 
 ```bash
 mkdir -p ~/.claude/skills
-cp -R skills/ui-design-core skills/web-ui-design skills/mobile-ui-design skills/game-ui-design ~/.claude/skills/
+cp -R skills/ui-design-core skills/web-ui-design skills/mobile-ui-design skills/game-ui-design skills/ui-review ~/.claude/skills/
 ```
 
 Install `ui-design-core` alongside any platform layer; the platform layers assume it is present.
