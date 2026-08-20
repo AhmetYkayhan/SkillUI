@@ -1,6 +1,6 @@
 ---
 name: game-ui-design
-description: Use when designing or changing game interface - HUD, pause menu, inventory, quest log, map or minimap, skill tree, scoreboard, settings and key rebinding, crosshair, gameplay overlays, or controller focus navigation - in Godot, Unity, Unreal, or any custom engine or game framework. Not for business dashboards, productivity apps, or game logic without a UI change.
+description: Use when designing or changing game interface - HUD, pause menu, inventory, quest log, map or minimap, skill tree, scoreboard, settings and key rebinding, crosshair, gameplay overlays, or controller focus navigation - in Godot, Unity, Unreal, any custom engine or game framework, or a game rendered in a browser or on a mobile device. Not for business dashboards, productivity apps, or game logic without a UI change.
 ---
 
 # Game UI Design

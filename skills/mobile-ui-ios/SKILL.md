@@ -1,6 +1,6 @@
 ---
 name: mobile-ui-ios
-description: Use when implementing or fixing UI in a native iOS or iPadOS app - SwiftUI or UIKit screens, navigation and sheets, safe areas, Dynamic Type, SF Symbols, keyboard behavior, iPad adaptation, or Apple platform conventions in an Xcode project. Not for Android, Flutter or React Native shared UI, or web.
+description: Use when implementing or fixing UI in a native iOS or iPadOS app - SwiftUI or UIKit screens, navigation and sheets, safe areas, Dynamic Type, SF Symbols, keyboard behavior, iPad adaptation, or Apple platform conventions in an Xcode project. Not for Android or web, and not for non-visual logic changes with no UI impact. In a Flutter or React Native codebase, use only when the task is specifically about iOS-native behavior.
 ---
 
 # iOS UI Implementation

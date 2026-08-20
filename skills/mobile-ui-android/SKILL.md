@@ -1,6 +1,6 @@
 ---
 name: mobile-ui-android
-description: Use when implementing or fixing UI in a native Android app - Jetpack Compose or Android Views screens, system bars and window insets, back behavior, IME and keyboard handling, Material components and theming, large-screen adaptation, or Android platform conventions in a Gradle Android project. Not for iOS, Flutter or React Native shared UI, or web.
+description: Use when implementing or fixing UI in a native Android app - Jetpack Compose or Android Views screens, system bars and window insets, back behavior, IME and keyboard handling, Material components and theming, large-screen adaptation, or Android platform conventions in a Gradle Android project. Not for iOS or web, and not for non-visual logic changes with no UI impact. In a Flutter or React Native codebase, use only when the task is specifically about Android-native behavior.
 ---
 
 # Android UI Implementation

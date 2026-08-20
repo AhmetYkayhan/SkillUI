@@ -1,6 +1,6 @@
 ---
 name: web-ui-design
-description: Use when designing or changing UI that runs in a browser - web apps, dashboards, admin panels, landing pages, forms, tables, navigation, responsive layout, or component styling in React, Next.js, Vue, Svelte, Angular, or plain HTML/CSS. Not for native mobile UI, game UI, or non-visual frontend logic.
+description: Use when designing or changing UI that runs in a browser - web apps, dashboards, admin panels, landing pages, forms, tables, navigation, responsive layout, or component styling in React, Next.js, Vue, Svelte, Angular, or plain HTML/CSS. Not for native mobile UI (including React Native and other shared-codebase mobile UI), game UI, or non-visual frontend logic.
 ---
 
 # Web UI Design

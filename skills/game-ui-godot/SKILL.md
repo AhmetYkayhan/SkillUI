@@ -1,6 +1,6 @@
 ---
 name: game-ui-godot
-description: Use when implementing or fixing UI in a Godot project - Control and Container layout, anchors and offsets, Theme and StyleBox styling, CanvasLayer ordering, focus and controller navigation, viewport and stretch behavior, or UI scene structure in .tscn and .gd files. Not for Unity, Unreal, or non-Godot engines.
+description: Use when implementing or fixing UI in a Godot project - Control and Container layout, anchors and offsets, Theme and StyleBox styling, CanvasLayer ordering, focus and controller navigation, viewport and stretch behavior, or UI scene structure in .tscn and .gd files. Not for Unity, Unreal, non-Godot engines, or game logic and other non-visual Godot changes with no UI impact.
 ---
 
 # Godot UI Implementation
