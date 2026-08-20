@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "skillui",
+  "description": "Layered UI/UX design skills for Claude Code, from universal design rules down to per-platform and per-engine specializations.",
+  "owner": {
+    "name": "AhmetYKayhan",
+    "url": "https://github.com/AhmetYkayhan"
+  },
+  "plugins": [
+    {
+      "name": "skillui",
+      "description": "Layered UI design skills: core rules plus web, mobile, iOS, Android, cross-platform, game, Godot and review layers that load only when relevant.",
+      "source": "./",
+      "category": "design"
+    }
+  ]
+}

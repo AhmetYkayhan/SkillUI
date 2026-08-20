@@ -1,79 +1,116 @@
 # SkillUI
 
-A layered set of Agent Skills for UI/UX work. The core layer holds platform-independent
-design rules, platform layers specialize them, and engine or OS layers specialize those
-further.
+A layered set of Agent Skills for UI/UX work, packaged as a Claude Code plugin. The core layer
+holds platform-independent design rules, platform layers specialize them, and engine or OS layers
+specialize those further. Each layer loads only when the task calls for it.
 
-## Layout
-
-```
-skills/
-├── ui-design-core/      # platform-independent UI/UX decision rules
-├── web-ui-design/       # browser specialization
-├── mobile-ui-design/    # mobile application specialization
-├── mobile-ui-ios/       # iOS implementation layer under mobile-ui-design
-├── mobile-ui-android/   # Android implementation layer under mobile-ui-design
-├── mobile-ui-crossplatform/  # shared-codebase orchestration layer
-├── game-ui-design/      # game and HUD specialization
-├── game-ui-godot/       # Godot implementation layer under game-ui-design
-└── ui-review/           # audit pass over UI that already exists
-```
-
-Layers:
+## Included skills
 
 | Skill | Responsibility |
 |---|---|
-| `ui-design-core` | Universal UI/UX rules. Available now. |
-| `web-ui-design` | Web/browser specialization. Available now. |
-| `mobile-ui-design` | Native and cross-platform mobile specialization. Available now. |
-| `mobile-ui-ios` | iOS and iPadOS native behavior and implementation. Available now. |
-| `mobile-ui-android` | Android native behavior and implementation. Available now. |
-| `mobile-ui-crossplatform` | Shared-versus-adaptive decisions for one codebase on both platforms. Available now. |
-| `game-ui-design` | Game engine HUD and menu specialization. Available now. |
-| `game-ui-godot` | Godot Control, Theme, focus and viewport implementation. Available now. |
-| `ui-review` | Detailed UI audit and review pass. Available now. |
+| `ui-design-core` | Universal UI/UX rules: hierarchy, layout, spacing, typography, states, accessibility principles. |
+| `web-ui-design` | Browser specialization: semantics, layout mechanics, responsive behavior, forms, tables, overlays. |
+| `mobile-ui-design` | Mobile application specialization: touch, safe areas, keyboard, navigation, adaptive layout. |
+| `mobile-ui-ios` | iOS and iPadOS implementation: SwiftUI or UIKit, presentation, Dynamic Type, iPad adaptation. |
+| `mobile-ui-android` | Android implementation: Compose or Views, insets, back behavior, IME, Material theming. |
+| `mobile-ui-crossplatform` | Shared-codebase decisions: what stays shared, what adapts, when a platform branch is justified. |
+| `game-ui-design` | Game specialization: HUD priority, occlusion, input modality, controller focus, resolution resilience. |
+| `game-ui-godot` | Godot implementation: Control and Container layout, Theme, CanvasLayer, focus, viewport behavior. |
+| `ui-review` | Audit pass over UI that already exists: evidence, severity, priority, scoped fixes. |
 
-Engine and OS layers such as `mobile-ui-ios`, `mobile-ui-android`, and `game-ui-godot` sit under a platform layer and load on top of
-it. Install one only for projects that use that engine or OS.
+## Routing model
 
-## Design principles
+```
+ui-design-core
+├── web-ui-design
+├── mobile-ui-design
+│   ├── mobile-ui-ios
+│   ├── mobile-ui-android
+│   └── mobile-ui-crossplatform
+├── game-ui-design
+│   └── game-ui-godot
+└── ui-review
+```
 
-- **Core owns what is universally true.** A rule lives in `ui-design-core` only if it holds
-  for web, mobile and game UI alike. Everything else belongs to a platform layer.
-- **No duplicated rules.** A platform layer specializes, extends, or overrides the core.
-  It never restates it.
-- **Small context footprint.** Each skill is an agent behavior specification, not a design
-  handbook. Detailed audit rules are deliberately kept out of the core and left to `ui-review`.
-- **No invented project facts.** Frameworks, design systems, tokens, device targets and brand
-  values are read from the project or asked about — never assumed.
+**This is a conceptual routing model, not an inheritance mechanism.** Claude Code has no skill
+inheritance or dependency system, and this plugin does not add one. Each skill is discovered
+independently through its own `description`; the tree describes how the rules are divided, not how
+they load. What keeps the layers from overlapping is that the core owns what is universally true
+and every other layer states what it is *not* for.
+
+Typical combinations:
+
+| Task | Layers that apply |
+|---|---|
+| SwiftUI or UIKit screen | core + mobile + ios |
+| Jetpack Compose or Views screen | core + mobile + android |
+| Flutter or React Native screen | core + mobile + crossplatform |
+| Flutter screen, iOS-specific bug | core + mobile + crossplatform + ios |
+| React or Next.js dashboard | core + web |
+| Godot HUD or menu | core + game + godot |
+| Unity or Unreal UI | core + game |
+| "Review this screen" | the layers above + review |
+| Non-visual logic, any stack | none |
 
 ## Install
 
-Copy or symlink a skill directory into your skills directory.
+The plugin is a directory of Markdown skills. There is no build step.
 
-Project scope:
-
-```bash
-mkdir -p .claude/skills
-cp -R skills/ui-design-core skills/web-ui-design skills/mobile-ui-design skills/game-ui-design skills/ui-review .claude/skills/
-cp -R skills/mobile-ui-ios .claude/skills/      # only for native iOS projects
-cp -R skills/mobile-ui-android .claude/skills/  # only for native Android projects
-cp -R skills/mobile-ui-crossplatform .claude/skills/  # only for shared-codebase mobile projects
-cp -R skills/game-ui-godot .claude/skills/  # only for Godot projects
-```
-
-User scope, available in every project:
+Load it from a local clone for the current session:
 
 ```bash
-mkdir -p ~/.claude/skills
-cp -R skills/ui-design-core skills/web-ui-design skills/mobile-ui-design skills/game-ui-design skills/ui-review skills/mobile-ui-ios skills/mobile-ui-android skills/mobile-ui-crossplatform skills/game-ui-godot ~/.claude/skills/
+claude --plugin-dir /path/to/SkillUI
 ```
 
-Install `ui-design-core` alongside any platform layer; the platform layers assume it is present.
+Inspect what it contributes, including its token cost:
+
+```bash
+claude --plugin-dir /path/to/SkillUI plugin details skillui
+```
+
+For a persistent install, this repository also ships `.claude-plugin/marketplace.json`, so it can
+be added as a plugin marketplace source and installed through Claude Code's `/plugin` interface in
+an interactive session. Run `claude plugin --help` for the management commands your version
+supports — `enable`, `disable`, and `details` operate on installed plugins.
+
+## Token cost
+
+Only the nine `description` lines stay in context; a skill's body loads when that skill actually
+fires. Measured with `claude plugin details skillui`:
+
+- Always-on: roughly 880 tokens for the whole plugin
+- Per skill when it fires: roughly 1.7k–4.7k tokens
+
+A typical task loads two or three layers, not nine.
+
+## Design principles
+
+- **Core owns what is universally true.** A rule lives in `ui-design-core` only if it holds for
+  web, mobile and game UI alike. Everything else belongs to a platform layer.
+- **No duplicated rules.** A platform layer specializes, extends, or overrides the core. It never
+  restates it.
+- **Small context footprint.** Each skill is an agent behavior specification, not a design
+  handbook. Detailed audit rules are deliberately kept out of the core and left to `ui-review`.
+- **No invented project facts.** Frameworks, design systems, tokens, device targets, platform
+  versions and brand values are read from the project or asked about — never assumed.
+- **Tooling is optional.** No skill requires an MCP server, a design-tool connection, or a runtime
+  inspector. Where one exists it is used as evidence; where it does not, the work continues.
 
 ## Compatibility
 
 Each skill is a directory containing a `SKILL.md` with YAML frontmatter limited to `name` and
-`description`. No non-standard metadata, no custom activation mechanism, and no cross-skill
-dependency system is used, so the skills work with any agent runtime that follows the Agent
-Skills format.
+`description`. No non-standard metadata, no custom activation mechanism, no loader, and no
+cross-skill dependency system is used. The skills work with any agent runtime that follows the
+Agent Skills format; the plugin manifest is what makes them installable in Claude Code.
+
+The plugin contributes skills only — no commands, agents, hooks, or MCP servers.
+
+## Status
+
+Version 0.1.0, initial packaged release. The nine skills have been through a static routing review
+(28 pass, 2 accepted warnings, 0 failures); skill composition may still evolve.
+
+If you already installed these skills by copying them into a skills directory, remove those copies
+after installing the plugin — otherwise each skill is present twice.
+
+No `LICENSE` file is present in this repository yet.

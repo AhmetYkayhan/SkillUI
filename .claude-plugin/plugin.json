@@ -1,0 +1,11 @@
+{
+  "name": "skillui",
+  "version": "0.1.0",
+  "description": "A layered UI design skill set for Claude Code: universal design rules, browser, native mobile, iOS, Android, cross-platform, game and Godot specializations, plus a review pass. Each layer loads only when the task calls for it.",
+  "author": {
+    "name": "AhmetYKayhan",
+    "url": "https://github.com/AhmetYkayhan"
+  },
+  "homepage": "https://github.com/AhmetYkayhan/SkillUI",
+  "keywords": ["ui", "ux", "design", "web", "mobile", "game", "review"]
+}
