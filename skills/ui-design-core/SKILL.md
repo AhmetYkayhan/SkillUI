@@ -1,6 +1,6 @@
 ---
 name: ui-design-core
-description: Use when designing, implementing, restyling or restructuring any user interface - screens, layouts, components, navigation, spacing, typography, hierarchy, interaction states, empty/loading/error states - on any platform. Load before writing or changing UI code. Not for backend, data, or non-visual logic.
+description: Use when building or changing the visual design of an interface - screen layout, visual hierarchy, spacing, typography, component structure, or interaction and data states. Not for wiring, data fetching, or non-visual logic.
 ---
 
 # UI Design Core
@@ -31,7 +31,9 @@ Never scan the whole repository by default.
 
 ## 2. Platform layer
 
-Platform-specific rules live in separate skills (`web-ui-design`, `mobile-ui-design`, `game-ui-design`). Core rules stay valid on every platform; a platform skill specializes or overrides them, and its rule wins on direct conflict.
+Platform-specific rules live in separate skills (`web-ui-design`, `mobile-ui-design`, `game-ui-design`). A platform skill specializes core rules for its medium: it sets concrete values, conventions, and mechanics the core deliberately leaves open.
+
+On conflict, the platform skill wins on how a rule is expressed. It does not repeal the core principle behind it. If a platform skill appears to contradict a core principle rather than adapt it, follow the core and say so.
 
 Determine platform from concrete project evidence — config files, project files, source language, dependency manifests, or an explicit statement from the user. A single weak signal is not evidence.
 
@@ -50,7 +52,7 @@ Do not produce design analysis that the task does not require.
 
 **UNDERSTAND** — screen purpose, primary user goal, primary action, secondary actions, information that must be visible, existing project patterns.
 
-**REUSE** — search existing components, tokens, layouts, variants, and interaction patterns. Reuse or extend before creating. A near-duplicate component is a defect.
+**REUSE** — search existing components, tokens, layouts, variants, and interaction patterns. Reuse or extend before creating. Prefer a new variant of an existing component over a near-duplicate; create a separate component when the difference is structural rather than cosmetic.
 
 **STRUCTURE** — resolve information architecture, content priority, grouping, layout, and visual hierarchy. No styling yet.
 
@@ -108,13 +110,13 @@ When building an interactive element, design its real states, not only the ideal
 
 Include only states the platform and the component actually have. Do not force a state that does not exist on the target platform.
 
-Every list, table, or data surface needs a defined empty state and error state before it ships.
+If a surface renders data that can be absent, delayed, or fail, define its empty, loading, and error states in the same pass as its populated state.
 
 ## 10. Accessibility (principles)
 
 - Sufficient text and UI contrast.
 - Never communicate state or meaning by color alone.
-- Visible focus and clear interactive affordance.
+- Interactive elements look interactive, and the active or selected element is visually distinct wherever the platform has a focus, selection, or cursor model.
 - Adequate target size for the input method in use.
 - Meaningful labels for every control; icon-only controls need an accessible name.
 - Errors state what happened and what to do.
@@ -126,3 +128,12 @@ Platform accessibility APIs belong to the platform skill.
 Detailed UI audits belong to a separate review skill. Here, apply only the quality rules needed while producing the UI.
 
 Do not modify backend, data, or business logic unless the UI task genuinely requires it.
+
+## 12. Scope preservation
+
+Change what the task asks for and what it structurally depends on. Nothing else.
+
+- Do not restyle, reorganize, or "clean up" surrounding UI that the task did not name.
+- Do not remove or reword existing content, labels, or copy unless that is the task.
+- Do not drop existing states, variants, props, or behavior while restructuring.
+- If you find a real problem outside the requested scope, report it and leave it in place.
