@@ -12,6 +12,7 @@ skills/
 ├── web-ui-design/       # browser specialization
 ├── mobile-ui-design/    # mobile application specialization
 ├── mobile-ui-ios/       # iOS implementation layer under mobile-ui-design
+├── mobile-ui-android/   # Android implementation layer under mobile-ui-design
 ├── game-ui-design/      # game and HUD specialization
 ├── game-ui-godot/       # Godot implementation layer under game-ui-design
 └── ui-review/           # audit pass over UI that already exists
@@ -25,11 +26,12 @@ Layers:
 | `web-ui-design` | Web/browser specialization. Available now. |
 | `mobile-ui-design` | Native and cross-platform mobile specialization. Available now. |
 | `mobile-ui-ios` | iOS and iPadOS native behavior and implementation. Available now. |
+| `mobile-ui-android` | Android native behavior and implementation. Available now. |
 | `game-ui-design` | Game engine HUD and menu specialization. Available now. |
 | `game-ui-godot` | Godot Control, Theme, focus and viewport implementation. Available now. |
 | `ui-review` | Detailed UI audit and review pass. Available now. |
 
-Engine and OS layers such as `mobile-ui-ios` and `game-ui-godot` sit under a platform layer and load on top of
+Engine and OS layers such as `mobile-ui-ios`, `mobile-ui-android`, and `game-ui-godot` sit under a platform layer and load on top of
 it. Install one only for projects that use that engine or OS.
 
 ## Design principles
@@ -52,7 +54,8 @@ Project scope:
 ```bash
 mkdir -p .claude/skills
 cp -R skills/ui-design-core skills/web-ui-design skills/mobile-ui-design skills/game-ui-design skills/ui-review .claude/skills/
-cp -R skills/mobile-ui-ios .claude/skills/   # only for native iOS projects
+cp -R skills/mobile-ui-ios .claude/skills/      # only for native iOS projects
+cp -R skills/mobile-ui-android .claude/skills/  # only for native Android projects
 cp -R skills/game-ui-godot .claude/skills/  # only for Godot projects
 ```
 
@@ -60,7 +63,7 @@ User scope, available in every project:
 
 ```bash
 mkdir -p ~/.claude/skills
-cp -R skills/ui-design-core skills/web-ui-design skills/mobile-ui-design skills/game-ui-design skills/ui-review skills/mobile-ui-ios skills/game-ui-godot ~/.claude/skills/
+cp -R skills/ui-design-core skills/web-ui-design skills/mobile-ui-design skills/game-ui-design skills/ui-review skills/mobile-ui-ios skills/mobile-ui-android skills/game-ui-godot ~/.claude/skills/
 ```
 
 Install `ui-design-core` alongside any platform layer; the platform layers assume it is present.
