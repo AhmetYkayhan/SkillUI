@@ -13,6 +13,7 @@ skills/
 ├── mobile-ui-design/    # mobile application specialization
 ├── mobile-ui-ios/       # iOS implementation layer under mobile-ui-design
 ├── mobile-ui-android/   # Android implementation layer under mobile-ui-design
+├── mobile-ui-crossplatform/  # shared-codebase orchestration layer
 ├── game-ui-design/      # game and HUD specialization
 ├── game-ui-godot/       # Godot implementation layer under game-ui-design
 └── ui-review/           # audit pass over UI that already exists
@@ -27,6 +28,7 @@ Layers:
 | `mobile-ui-design` | Native and cross-platform mobile specialization. Available now. |
 | `mobile-ui-ios` | iOS and iPadOS native behavior and implementation. Available now. |
 | `mobile-ui-android` | Android native behavior and implementation. Available now. |
+| `mobile-ui-crossplatform` | Shared-versus-adaptive decisions for one codebase on both platforms. Available now. |
 | `game-ui-design` | Game engine HUD and menu specialization. Available now. |
 | `game-ui-godot` | Godot Control, Theme, focus and viewport implementation. Available now. |
 | `ui-review` | Detailed UI audit and review pass. Available now. |
@@ -56,6 +58,7 @@ mkdir -p .claude/skills
 cp -R skills/ui-design-core skills/web-ui-design skills/mobile-ui-design skills/game-ui-design skills/ui-review .claude/skills/
 cp -R skills/mobile-ui-ios .claude/skills/      # only for native iOS projects
 cp -R skills/mobile-ui-android .claude/skills/  # only for native Android projects
+cp -R skills/mobile-ui-crossplatform .claude/skills/  # only for shared-codebase mobile projects
 cp -R skills/game-ui-godot .claude/skills/  # only for Godot projects
 ```
 
@@ -63,7 +66,7 @@ User scope, available in every project:
 
 ```bash
 mkdir -p ~/.claude/skills
-cp -R skills/ui-design-core skills/web-ui-design skills/mobile-ui-design skills/game-ui-design skills/ui-review skills/mobile-ui-ios skills/mobile-ui-android skills/game-ui-godot ~/.claude/skills/
+cp -R skills/ui-design-core skills/web-ui-design skills/mobile-ui-design skills/game-ui-design skills/ui-review skills/mobile-ui-ios skills/mobile-ui-android skills/mobile-ui-crossplatform skills/game-ui-godot ~/.claude/skills/
 ```
 
 Install `ui-design-core` alongside any platform layer; the platform layers assume it is present.
