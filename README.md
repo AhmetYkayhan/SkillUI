@@ -105,6 +105,20 @@ Agent Skills format; the plugin manifest is what makes them installable in Claud
 
 The plugin contributes skills only — no commands, agents, hooks, or MCP servers.
 
+## Maintenance
+
+Update tracking lives in `maintenance/` and never loads during normal use — it is documentation in
+the repository, not a skill.
+
+- `UPDATE_SOURCES.md` — the bounded list of authoritative sources SkillUI watches.
+- `UPDATE_WORKFLOW.md` — how an external change becomes a patch.
+- `UPDATE_AUDIT_PROMPT.md` — hand this to Claude in this repository to run an audit.
+- `AUDIT_HISTORY.md` — one line per run.
+
+**An audit never edits a skill.** It researches, classifies, compares against the current rules,
+and proposes. Applying anything is a separate, explicit decision. That is what keeps the library
+deterministic instead of drifting with whatever documentation changed this month.
+
 ## Status
 
 Version 0.1.0, initial packaged release. The nine skills have been through a static routing review
